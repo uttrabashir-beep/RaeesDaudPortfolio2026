@@ -2,7 +2,7 @@
    API
 ========================= */
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://raeesdaudportfolio2026-prod.up.railway.app";
 
 
 /* =========================
