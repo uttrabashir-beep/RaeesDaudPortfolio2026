@@ -167,6 +167,9 @@ if (!hasIsRead) {
 // DEFAULT ADMIN
 // =====================================================
 
+const defaultAdminEmail =
+    "admin@raeesdaud.com";
+
 const defaultAdminPassword =
     process.env.ADMIN_PASSWORD;
 
