@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Raees Daud — Admin Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+<div class="dashboard-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            <h2>Raees Daud</h2>
+            <span>Admin Panel</span>
+        </div>
+
+        <nav class="sidebar-nav">
+
+            <button type="button" class="nav-item active" data-section="dashboard">
+                <span>Dashboard</span>
+            </button>
+
+            <button type="button" class="nav-item" data-section="portfolio">
+                <span>Portfolio</span>
+            </button>
+
+            <button type="button" class="nav-item" data-section="videos">
+                <span>Videos</span>
+            </button>
+
+            <button type="button" class="nav-item" data-section="messages">
+                <span>Messages</span>
+                <span id="messageBadge" class="nav-badge">0</span>
+            </button>
+
+            <button type="button" class="nav-item" data-section="profile">
+                <span>Profile</span>
+            </button>
+
+            <button type="button" class="nav-item" data-section="services">
+                <span>Services</span>
+            </button>
+
+            <button type="button" class="nav-item" data-section="settings">
+                <span>Settings</span>
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+            <button type="button" id="logoutBtn" class="logout-btn">
+                Logout
+            </button>
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN ================= -->
+    <main class="dashboard-main">
+
+        <!-- TOP BAR -->
+        <header class="dashboard-header">
+
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p id="pageSubtitle">Welcome back, Raees.</p>
+            </div>
+
+            <div class="admin-info">
+                <div class="admin-avatar" id="adminAvatar">
+                    R
+                </div>
+
+                <div>
+                    <strong id="adminName">Raees Daud</strong>
+                    <small id="adminEmail">admin@raeesdaud.com</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             DASHBOARD
+        ====================================================== -->
+        <section id="dashboardSection" class="dashboard-section active">
+
+            <div class="welcome-card">
+
+                <div>
+                    <span class="eyebrow">ADMIN PANEL</span>
+                    <h2>Welcome back, Raees Daud</h2>
+                    <p>
+                        Manage your portfolio, videos, messages and website
+                        settings from one place.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <!-- STATS -->
+            <div class="stats-grid">
+
+                <div class="stat-card">
+                    <span>Portfolio Projects</span>
+                    <strong id="portfolioCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Videos</span>
+                    <strong id="videoCount">0</strong>
+                </div>
+
+                <div class="stat-card">
+                    <span>Total Messages</span>
+                    <strong id="messageCount">0</strong>
+                </div>
+
+                <div class="stat-card unread-stat">
+                    <span>Unread Messages</span>
+                    <strong id="unreadMessageCount">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+            <div class="content-card">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>Quick Actions</h2>
+                        <p>Quickly manage your website content.</p>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+
+                    <button type="button" id="quickAddProject" class="action-btn">
+                        Add Portfolio Project
+                    </button>
+
+                    <button type="button" id="quickAddVideo" class="action-btn">
+                        Upload Video
+                    </button>
+
+                    <button type="button" id="quickMessages" class="action-btn">
+                        View Messages
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PORTFOLIO
+        ====================================================== -->
+        <section id="portfolioSection" class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Portfolio</h2>
+                    <p>Manage your portfolio projects.</p>
+                </div>
+
+                <button type="button" id="addProjectBtn" class="primary-btn">
+                    + Add Project
+                </button>
+
+            </div>
+
+
+            <!-- SEARCH / FILTER -->
+            <div class="toolbar">
+
+                <input
+                    type="search"
+                    id="portfolioSearch"
+                    placeholder="Search projects..."
+                    aria-label="Search portfolio projects"
+                >
+
+                <select id="portfolioFilter" aria-label="Filter portfolio projects">
+                    <option value="all">All Categories</option>
+                </select>
+
+            </div>
+
+
+            <!-- CATEGORY MANAGER -->
+            <div class="content-card category-manager">
+
+                <div class="section-heading small-heading">
+
+                    <div>
+                        <h3>Portfolio Categories</h3>
+                        <p>Create and manage project categories.</p>
+                    </div>
+
+                </div>
+
+                <div class="category-add-row">
+
+                    <label for="categoryName" class="sr-only">
+                        Category name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="categoryName"
+                        placeholder="Enter category name"
+                    >
+
+                    <button
+                        type="button"
+                        id="addCategoryBtn"
+                        class="primary-btn"
+                    >
+                        Add Category
+                    </button>
+
+                </div>
+
+                <div id="categoriesList" class="categories-list">
+                    <!-- Categories loaded by dashboard.js -->
+                </div>
+
+                <div id="categoryMessage" class="form-message"></div>
+
+            </div>
+
+
+            <!-- PROJECT FORM -->
+            <div id="projectFormBox" class="modal-box hidden">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <div>
+                            <h2 id="projectFormTitle">Add Project</h2>
+                            <p>Add a new portfolio project.</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="closeProjectForm"
+                            class="close-btn"
+                            aria-label="Close project form"
+                        >
+                            ×
+                        </button>
+                    </div>
+
+
+                    <form id="projectForm">
+
+                        <input type="hidden" id="projectId">
+
+
+                        <div class="form-group">
+
+                            <label for="projectTitle">
+                                Project Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="projectTitle"
+                                required
+                                placeholder="Project title"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="projectCategory">
+                                Category
+                            </label>
+
+                            <select id="projectCategory" required>
+                                <option value="">
+                                    Select Category
+                                </option>
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="projectDescription">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="projectDescription"
+                                rows="5"
+                                placeholder="Project description"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="projectImage">
+                                Project Image
+                            </label>
+
+                            <input
+                                type="file"
+                                id="projectImage"
+                                accept="image/*"
+                            >
+
+                            <input
+                                type="hidden"
+                                id="selectedFile"
+                            >
+
+                        </div>
+
+
+                        <div id="currentImageBox" class="image-box hidden">
+
+                            <p>Current Image</p>
+
+                            <img
+                                id="currentProjectImage"
+                                src=""
+                                alt="Current project"
+                            >
+
+                        </div>
+
+
+                        <div id="imagePreviewBox" class="image-box hidden">
+
+                            <p>New Image Preview</p>
+
+                            <img
+                                id="imagePreview"
+                                src=""
+                                alt="New project preview"
+                            >
+
+                        </div>
+
+
+                        <div id="formMessage" class="form-message"></div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                id="cancelProjectBtn"
+                                class="secondary-btn"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                id="saveProjectBtn"
+                                class="primary-btn"
+                            >
+                                Save Project
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROJECT GRID -->
+            <div id="portfolioGrid" class="portfolio-grid">
+                <!-- Portfolio projects loaded by dashboard.js -->
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             VIDEOS
+        ====================================================== -->
+        <section id="videosSection" class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Videos</h2>
+                    <p>Upload and manage your videos.</p>
+                </div>
+
+                <button type="button" id="addVideoBtn" class="primary-btn">
+                    + Upload Video
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    type="search"
+                    id="videoSearch"
+                    placeholder="Search videos..."
+                    aria-label="Search videos"
+                >
+
+            </div>
+
+
+            <!-- VIDEO FORM -->
+            <div id="videoFormBox" class="modal-box hidden">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+
+                        <div>
+                            <h2>Upload Video</h2>
+                            <p>Add a new video to your website.</p>
+                        </div>
+
+                        <button
+                            type="button"
+                            id="closeVideoForm"
+                            class="close-btn"
+                            aria-label="Close video form"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <form id="videoForm">
+
+                        <input type="hidden" id="videoId">
+
+
+                        <div class="form-group">
+
+                            <label for="videoTitle">
+                                Video Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="videoTitle"
+                                required
+                                placeholder="Video title"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="videoDescription">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="videoDescription"
+                                rows="5"
+                                placeholder="Video description"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="videoFile">
+                                Video File
+                            </label>
+
+                            <input
+                                type="file"
+                                id="videoFile"
+                                accept="video/*"
+                            >
+
+                            <input
+                                type="hidden"
+                                id="selectedVideo"
+                            >
+
+                        </div>
+
+
+                        <div id="videoPreviewBox" class="video-preview-box hidden">
+
+                            <video
+                                id="videoPreview"
+                                controls
+                                preload="metadata"
+                            ></video>
+
+                        </div>
+
+
+                        <div id="videoFormMessage" class="form-message"></div>
+
+
+                        <div class="form-actions">
+
+                            <button
+                                type="button"
+                                id="cancelVideoBtn"
+                                class="secondary-btn"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                id="saveVideoBtn"
+                                class="primary-btn"
+                            >
+                                Upload Video
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <div id="videosGrid" class="videos-grid">
+                <!-- Videos loaded by dashboard.js -->
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             MESSAGES
+        ====================================================== -->
+        <section id="messagesSection" class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Messages</h2>
+                    <p>Messages received from your website.</p>
+                </div>
+
+                <button
+                    type="button"
+                    id="markAllReadBtn"
+                    class="secondary-btn"
+                >
+                    Mark All as Read
+                </button>
+
+            </div>
+
+
+            <div class="toolbar">
+
+                <input
+                    type="search"
+                    id="messageSearch"
+                    placeholder="Search messages..."
+                    aria-label="Search messages"
+                >
+
+            </div>
+
+
+            <div id="messagesGrid" class="messages-grid">
+                <!-- Messages loaded by dashboard.js -->
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROFILE
+        ====================================================== -->
+        <section id="profileSection" class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Admin Profile</h2>
+                    <p>Update your administrator account.</p>
+                </div>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <form id="profileForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="profileName">
+                                Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="profileName"
+                                required
+                                placeholder="Your name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="profileEmail">
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="profileEmail"
+                                required
+                                placeholder="Email address"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="currentPassword">
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="currentPassword"
+                                placeholder="Current password"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="newPassword">
+                                New Password
+                            </label>
+
+                            <input
+                                type="password"
+                                id="newPassword"
+                                placeholder="Leave empty to keep current password"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="profileMessage" class="form-message"></div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            id="saveProfileBtn"
+                            class="primary-btn"
+                        >
+                            Save Profile
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SERVICES
+        ====================================================== -->
+        <section id="servicesSection" class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Services</h2>
+                    <p>Your current professional services.</p>
+                </div>
+
+            </div>
+
+
+            <div class="services-grid">
+
+                <div class="service-card">
+                    <h3>Graphic Design</h3>
+                    <p>Professional graphic design for different platforms.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Logo Design</h3>
+                    <p>Creative and professional logo design.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Social Media Posts</h3>
+                    <p>Engaging social media post designs.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Meta Ads</h3>
+                    <p>Creative advertisements for social media campaigns.</p>
+                </div>
+
+                <div class="service-card">
+                    <h3>Reels</h3>
+                    <p>Short-form video and reel content.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SETTINGS
+        ====================================================== -->
+        <section id="settingsSection" class="dashboard-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <h2>Website Settings</h2>
+                    <p>Manage your website information.</p>
+                </div>
+
+            </div>
+
+
+            <div class="content-card">
+
+                <form id="settingsForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="siteTitle">
+                                Site Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="siteTitle"
+                                placeholder="Website title"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="siteTagline">
+                                Tagline
+                            </label>
+
+                            <input
+                                type="text"
+                                id="siteTagline"
+                                placeholder="Website tagline"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="contactEmail">
+                                Contact Email
+                            </label>
+
+                            <input
+                                type="email"
+                                id="contactEmail"
+                                placeholder="Contact email"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="whatsapp">
+                                WhatsApp
+                            </label>
+
+                            <input
+                                type="text"
+                                id="whatsapp"
+                                placeholder="WhatsApp number"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="location">
+                                Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="location"
+                                placeholder="Your location"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="cvUrl">
+                                CV URL
+                            </label>
+
+                            <input
+                                type="text"
+                                id="cvUrl"
+                                placeholder="CV link"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="settingsMessage" class="form-message"></div>
+
+
+                    <div class="form-actions">
+
+                        <button
+                            type="submit"
+                            id="saveSettingsBtn"
+                            class="primary-btn"
+                        >
+                            Save Settings
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+<script src="dashboard.js"></script>
+
+</body>
+</html>
