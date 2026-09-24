@@ -167,11 +167,8 @@ if (!hasIsRead) {
 // DEFAULT ADMIN
 // =====================================================
 
-const defaultAdminEmail =
-    "admin@raeesdaud.com";
-
 const defaultAdminPassword =
-    "Raees@12345";
+    process.env.ADMIN_PASSWORD;
 
 const existingAdmin =
     db.prepare(
