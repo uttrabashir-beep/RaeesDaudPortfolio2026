@@ -17,9 +17,7 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
-const JWT_SECRET =
-    process.env.JWT_SECRET ||
-    "raees-daud-secret-change-this";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 
 // =====================================================
